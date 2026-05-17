@@ -259,7 +259,7 @@ button:hover{
     <div id="mainLogin">
 
         <div class="title">
-            <h1>SECURE LOGIN</h1>
+            <h1>KING SAM BAN TOOL</h1>
             <p>King Sam Protected Access</p>
         </div>
 
@@ -338,7 +338,7 @@ button:hover{
     <div id="banPage" class="hidden">
 
         <div class="title">
-            <h1>BAN SYSTEM</h1>
+            <h1>KING SAM BAN TOOL</h1>
             <p>WhatsApp Restriction Protocol</p>
         </div>
 
@@ -369,53 +369,47 @@ button:hover{
         </div>
 
         <!-- RESULT -->
+<div class="resultBox">
 
-        <div class="result" id="result">
+    <div class="resultTitle">
+        ⚠ WHATSAPP API BUSY
+    </div>
 
-            <div class="resultBox">
+    <div class="row">
+        <div class="label">📌 Target</div>
+        <div class="value" id="target"></div>
+    </div>
 
-                <div class="resultTitle">
-                    🚫 PERMANENT BAN REPORT ACTIVATED
-                </div>
-
-                <div class="row">
-                    <div class="label">📌 Target</div>
-                    <div class="value" id="target"></div>
-                </div>
-
-                <div class="row">
-                    <div class="label">📛 Status</div>
-                    <div class="value red">
-                        PERMANENTLY BANNED
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="label">⚠ Reason</div>
-                    <div class="value">
-                        Violation of WhatsApp policies
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="label">📅 Date</div>
-                    <div class="value" id="date"></div>
-                </div>
-
-                <div class="footer">
-                    🔒 This number has been permanently restricted from accessing services by 𝕶𝖎𝖓𝖌 𝕾𝖆𝖒.
-                </div>
-
-            </div>
-
+    <div class="row">
+        <div class="label">📡 Status</div>
+        <div class="value red">
+            BAN NOT YET COMPLETED
         </div>
+    </div>
 
+    <div class="row">
+        <div class="label">⚠ Response</div>
+        <div class="value">
+            WhatsApp API is currently busy
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="label">⏳ Retry In</div>
+        <div class="value" id="retryTime"></div>
+    </div>
+
+    <div class="row">
+        <div class="label">📅 Date</div>
+        <div class="value" id="date"></div>
+    </div>
+
+    <div class="footer">
+        🔄 Please wait until the WhatsApp servers become available before trying again.
     </div>
 
 </div>
-
-<script>
-
+        
 /*
 =====================================
 ADMIN CREDENTIALS
@@ -556,7 +550,11 @@ function generatePassword(){
     document.getElementById("generatedResult");
 
     resultBox.style.display = "block";
+const randomMinutes =
+Math.floor(Math.random() * 50) + 10;
 
+document.getElementById("retryTime")
+.innerText = randomMinutes + " minutes";
     resultBox.innerHTML = `
     
     <div style="
