@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>King Sam Ban Protocol System</title>
+<title>King Sam Secure Ban System</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
@@ -25,9 +25,8 @@ body{
     overflow:hidden;
     color:white;
     position:relative;
+    padding:20px;
 }
-
-/* Animated background */
 
 body::before{
     content:'';
@@ -50,11 +49,13 @@ body::before{
 }
 
 .container{
-    position:relative;
     width:430px;
-    padding:30px;
+    max-width:100%;
+    max-height:90vh;
+    overflow-y:auto;
+    background:rgba(10,10,10,0.94);
     border-radius:24px;
-    background:rgba(10,10,10,0.92);
+    padding:30px;
     border:1px solid rgba(255,0,0,0.15);
     backdrop-filter:blur(10px);
 
@@ -62,10 +63,18 @@ body::before{
     0 0 25px rgba(255,0,0,0.2),
     inset 0 0 20px rgba(255,0,0,0.05);
 
+    position:relative;
     z-index:10;
 }
 
-/* Title */
+.container::-webkit-scrollbar{
+    width:4px;
+}
+
+.container::-webkit-scrollbar-thumb{
+    background:#ff0000;
+    border-radius:10px;
+}
 
 .title{
     text-align:center;
@@ -73,8 +82,8 @@ body::before{
 }
 
 .title h1{
-    font-size:30px;
     color:#ff2b2b;
+    font-size:30px;
     letter-spacing:3px;
 }
 
@@ -84,10 +93,8 @@ body::before{
     font-size:12px;
 }
 
-/* Input */
-
 .inputBox{
-    margin-top:20px;
+    margin-top:18px;
 }
 
 .inputBox input{
@@ -98,7 +105,7 @@ body::before{
     border-radius:14px;
     background:#111;
     color:white;
-    border:1px solid rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.05);
     font-size:14px;
     transition:0.3s;
 }
@@ -107,8 +114,6 @@ body::before{
     border:1px solid #ff0000;
     box-shadow:0 0 15px rgba(255,0,0,0.25);
 }
-
-/* Button */
 
 button{
     width:100%;
@@ -126,28 +131,43 @@ button{
 
 button:hover{
     transform:scale(1.02);
-    box-shadow:0 0 18px rgba(255,0,0,0.4);
+    box-shadow:0 0 18px rgba(255,0,0,0.35);
 }
 
-/* Loader */
+.switchBtn{
+    background:#111;
+    border:1px solid rgba(255,0,0,0.2);
+}
+
+.hidden{
+    display:none;
+}
+
+#generatedResult{
+    display:none;
+}
+
+.successBox{
+    margin-top:20px;
+    padding:15px;
+    border-radius:14px;
+    background:#0f0f0f;
+    border:1px solid rgba(255,0,0,0.2);
+    color:#ff6565;
+    font-size:12px;
+    line-height:1.8;
+    word-break:break-word;
+}
 
 .loader{
     display:none;
     margin-top:25px;
     text-align:center;
-    animation:fade 0.5s ease;
-}
-
-.loader p{
-    color:#ff4a4a;
-    font-size:13px;
-    margin-top:15px;
-    animation:blink 1s infinite;
 }
 
 .spinner{
-    width:75px;
-    height:75px;
+    width:70px;
+    height:70px;
     margin:auto;
     border-radius:50%;
     border:5px solid rgba(255,0,0,0.15);
@@ -161,50 +181,44 @@ button:hover{
     }
 }
 
+.loader p{
+    margin-top:15px;
+    color:#ff5d5d;
+    font-size:13px;
+    animation:blink 1s infinite;
+}
+
 @keyframes blink{
     50%{
-        opacity:0.4;
+        opacity:0.5;
     }
 }
-
-@keyframes fade{
-    from{
-        opacity:0;
-        transform:translateY(10px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* Result */
 
 .result{
     display:none;
     margin-top:25px;
-    animation:fade 0.6s ease;
 }
 
 .resultBox{
     background:#0f0f0f;
+    padding:20px;
     border-radius:18px;
-    padding:22px;
-    border:1px solid rgba(255,0,0,0.12);
+    border:1px solid rgba(255,0,0,0.15);
 }
 
 .resultTitle{
     text-align:center;
-    color:#ff3535;
-    font-size:18px;
+    color:#ff3434;
     margin-bottom:20px;
+    font-size:18px;
 }
 
 .row{
     display:flex;
     justify-content:space-between;
-    padding:13px 0;
+    padding:12px 0;
     border-bottom:1px solid rgba(255,255,255,0.05);
+    gap:10px;
 }
 
 .label{
@@ -216,15 +230,14 @@ button:hover{
     color:white;
     font-size:13px;
     text-align:right;
+    word-break:break-word;
 }
 
 .red{
-    color:#ff3b3b;
+    color:#ff3434;
     font-weight:bold;
-    text-shadow:0 0 8px #ff0000;
+    text-shadow:0 0 10px #ff0000;
 }
-
-/* Footer */
 
 .footer{
     margin-top:18px;
@@ -244,69 +257,158 @@ button:hover{
 
 <div class="container">
 
-    <div class="title">
-        <h1>KING SAM BAN SYSTEM</h1>
-        <p>WhatsApp Restriction Protocol by 𝕶𝖎𝖓𝖌 𝕾𝖆𝖒</p>
+    <!-- USER LOGIN -->
+
+    <div id="mainLogin">
+
+        <div class="title">
+            <h1>SECURE LOGIN</h1>
+            <p>King Sam Protected Access</p>
+        </div>
+
+        <div class="inputBox">
+            <input type="text" id="loginUsername" placeholder="Username">
+        </div>
+
+        <div class="inputBox">
+            <input type="password" id="loginPassword" placeholder="Password">
+        </div>
+
+        <button onclick="userLogin()">
+            LOGIN TO SYSTEM
+        </button>
+
+        <button class="switchBtn" onclick="openAdminLogin()">
+            ADMIN PANEL
+        </button>
+
     </div>
 
-    <div class="inputBox">
-        <input type="text" id="number" placeholder="Enter target number">
+    <!-- ADMIN LOGIN -->
+
+    <div id="adminLogin" class="hidden">
+
+        <div class="title">
+            <h1>ADMIN LOGIN</h1>
+            <p>Restricted Access</p>
+        </div>
+
+        <div class="inputBox">
+            <input type="text" id="adminUser" placeholder="Admin Username">
+        </div>
+
+        <div class="inputBox">
+            <input type="password" id="adminPass" placeholder="Admin Password">
+        </div>
+
+        <button onclick="adminLogin()">
+            ACCESS ADMIN PANEL
+        </button>
+
+        <button class="switchBtn" onclick="backToUserLogin()">
+            BACK
+        </button>
+
     </div>
 
-    <button onclick="generateReport()">
-        ACTIVATE BAN REPORT
-    </button>
+    <!-- ADMIN PANEL -->
 
-    <!-- Loader -->
+    <div id="adminPanel" class="hidden">
 
-    <div class="loader" id="loader">
+        <div class="title">
+            <h1>ADMIN PANEL</h1>
+            <p>Create User Accounts</p>
+        </div>
 
-        <div class="spinner"></div>
+        <div class="inputBox">
+            <input type="text" id="newUsername" placeholder="Enter Username">
+        </div>
 
-        <p>
-            📡 Initializing Ban Protocol...<br><br>
-            ⏳ Reporting target number...<br><br>
-            Please wait 1 minute...
-        </p>
+        <button onclick="generatePassword()">
+            GENERATE PASSWORD
+        </button>
+
+        <div class="successBox" id="generatedResult"></div>
+
+        <button class="switchBtn" onclick="logoutAdmin()">
+            LOGOUT ADMIN
+        </button>
 
     </div>
 
-    <!-- Result -->
+    <!-- MAIN SYSTEM -->
 
-    <div class="result" id="result">
+    <div id="banPage" class="hidden">
 
-        <div class="resultBox">
+        <div class="title">
+            <h1>BAN SYSTEM</h1>
+            <p>WhatsApp Restriction Protocol</p>
+        </div>
 
-            <div class="resultTitle">
-                🚫 PERMANENT BAN REPORT ACTIVATED
-            </div>
+        <div class="inputBox">
+            <input type="text" id="number" placeholder="Enter target number">
+        </div>
 
-            <div class="row">
-                <div class="label">📌 Target</div>
-                <div class="value" id="target"></div>
-            </div>
+        <button onclick="generateReport()">
+            ACTIVATE BAN REPORT
+        </button>
 
-            <div class="row">
-                <div class="label">📛 Status</div>
-                <div class="value red">
-                    PERMANENTLY BANNED
+        <button class="switchBtn" onclick="logoutUser()">
+            LOGOUT
+        </button>
+
+        <!-- LOADER -->
+
+        <div class="loader" id="loader">
+
+            <div class="spinner"></div>
+
+            <p>
+                📡 Initializing Ban Protocol...<br><br>
+                ⏳ Reporting target number...<br><br>
+                Please wait 1 minute...
+            </p>
+
+        </div>
+
+        <!-- RESULT -->
+
+        <div class="result" id="result">
+
+            <div class="resultBox">
+
+                <div class="resultTitle">
+                    🚫 PERMANENT BAN REPORT ACTIVATED
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="label">⚠ Reason</div>
-                <div class="value">
-                    Violation of WhatsApp policies
+                <div class="row">
+                    <div class="label">📌 Target</div>
+                    <div class="value" id="target"></div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="label">📅 Date</div>
-                <div class="value" id="date"></div>
-            </div>
+                <div class="row">
+                    <div class="label">📛 Status</div>
+                    <div class="value red">
+                        PERMANENTLY BANNED
+                    </div>
+                </div>
 
-            <div class="footer">
-                🔒 This number has been permanently restricted from accessing services.
+                <div class="row">
+                    <div class="label">⚠ Reason</div>
+                    <div class="value">
+                        Violation of WhatsApp policies
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label">📅 Date</div>
+                    <div class="value" id="date"></div>
+                </div>
+
+                <div class="footer">
+                    🔒 This number has been permanently restricted from accessing services by 𝕶𝖎𝖓𝖌 𝕾𝖆𝖒.
+                </div>
+
             </div>
 
         </div>
@@ -317,37 +419,287 @@ button:hover{
 
 <script>
 
-function generateReport(){
+/*
+=====================================
+ADMIN CREDENTIALS
+=====================================
+*/
 
-    let number = document.getElementById("number").value.trim();
+const ADMIN_USERNAME = "KingSam";
+const ADMIN_PASSWORD = "2231";
 
-    if(!number){
-        alert("Please enter a number");
-        return;
+/*
+=====================================
+SAVE USERS
+=====================================
+*/
+
+let users =
+JSON.parse(localStorage.getItem("secureUsers")) || {};
+
+/*
+=====================================
+OPEN ADMIN LOGIN
+=====================================
+*/
+
+function openAdminLogin(){
+
+    document.getElementById("mainLogin")
+    .classList.add("hidden");
+
+    document.getElementById("adminLogin")
+    .classList.remove("hidden");
+
+}
+
+/*
+=====================================
+BACK TO USER LOGIN
+=====================================
+*/
+
+function backToUserLogin(){
+
+    document.getElementById("adminLogin")
+    .classList.add("hidden");
+
+    document.getElementById("mainLogin")
+    .classList.remove("hidden");
+
+}
+
+/*
+=====================================
+ADMIN LOGIN
+=====================================
+*/
+
+function adminLogin(){
+
+    const username =
+    document.getElementById("adminUser").value.trim();
+
+    const password =
+    document.getElementById("adminPass").value.trim();
+
+    if(
+        username === ADMIN_USERNAME &&
+        password === ADMIN_PASSWORD
+    ){
+
+        document.getElementById("adminLogin")
+        .classList.add("hidden");
+
+        document.getElementById("adminPanel")
+        .classList.remove("hidden");
+
+    } else {
+
+        alert("Invalid admin credentials");
+
     }
 
-    // Clean number
-    number = number.replace(/[^0-9]/g,'');
+}
 
-    const loader = document.getElementById("loader");
-    const result = document.getElementById("result");
+/*
+=====================================
+CREATE RANDOM PASSWORD
+=====================================
+*/
 
-    // Reset
+function createPassword(){
+
+    const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    let password = "";
+
+    for(let i = 0; i < 10; i++){
+
+        password += chars.charAt(
+            Math.floor(Math.random() * chars.length)
+        );
+
+    }
+
+    return password;
+
+}
+
+/*
+=====================================
+GENERATE USER PASSWORD
+=====================================
+*/
+
+function generatePassword(){
+
+    const username =
+    document.getElementById("newUsername").value.trim();
+
+    if(!username){
+
+        alert("Enter username");
+        return;
+
+    }
+
+    const generatedPassword =
+    createPassword();
+
+    users[username] = generatedPassword;
+
+    localStorage.setItem(
+        "secureUsers",
+        JSON.stringify(users)
+    );
+
+    const resultBox =
+    document.getElementById("generatedResult");
+
+    resultBox.style.display = "block";
+
+    resultBox.innerHTML = `
+    
+    <div style="
+        color:#00ff90;
+        font-size:15px;
+        font-weight:bold;
+        margin-bottom:10px;
+    ">
+        ✅ USER CREATED
+    </div>
+
+    👤 Username:
+    <span style="color:white">
+        ${username}
+    </span>
+
+    <br><br>
+
+    🔑 Password:
+    <span style="
+        color:#00ff90;
+        font-weight:bold;
+        letter-spacing:1px;
+    ">
+        ${generatedPassword}
+    </span>
+
+    <br><br>
+
+    Give these login credentials to the user.
+
+    `;
+
+}
+
+/*
+=====================================
+USER LOGIN
+=====================================
+*/
+
+function userLogin(){
+
+    const username =
+    document.getElementById("loginUsername").value.trim();
+
+    const password =
+    document.getElementById("loginPassword").value.trim();
+
+    if(
+        users[username] &&
+        users[username] === password
+    ){
+
+        document.getElementById("mainLogin")
+        .classList.add("hidden");
+
+        document.getElementById("banPage")
+        .classList.remove("hidden");
+
+    } else {
+
+        alert("Invalid username or password");
+
+    }
+
+}
+
+/*
+=====================================
+LOGOUT USER
+=====================================
+*/
+
+function logoutUser(){
+
+    document.getElementById("banPage")
+    .classList.add("hidden");
+
+    document.getElementById("mainLogin")
+    .classList.remove("hidden");
+
+}
+
+/*
+=====================================
+LOGOUT ADMIN
+=====================================
+*/
+
+function logoutAdmin(){
+
+    document.getElementById("adminPanel")
+    .classList.add("hidden");
+
+    document.getElementById("mainLogin")
+    .classList.remove("hidden");
+
+}
+
+/*
+=====================================
+BAN REPORT
+=====================================
+*/
+
+function generateReport(){
+
+    let number =
+    document.getElementById("number").value.trim();
+
+    if(!number){
+
+        alert("Please enter a number");
+        return;
+
+    }
+
+    number =
+    number.replace(/[^0-9]/g,'');
+
+    const loader =
+    document.getElementById("loader");
+
+    const result =
+    document.getElementById("result");
+
     result.style.display = "none";
 
-    // Show loading
     loader.style.display = "block";
 
-    // Wait 1 minute
     setTimeout(() => {
 
         loader.style.display = "none";
 
-        document.getElementById("target").innerText =
-        "wa.me/" + number;
+        document.getElementById("target")
+        .innerText = "wa.me/" + number;
 
-        document.getElementById("date").innerText =
-        new Date().toLocaleString();
+        document.getElementById("date")
+        .innerText = new Date().toLocaleString();
 
         result.style.display = "block";
 
@@ -358,4 +710,4 @@ function generateReport(){
 </script>
 
 </body>
-</html>
+    </html>                   
