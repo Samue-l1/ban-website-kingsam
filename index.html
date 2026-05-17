@@ -21,7 +21,6 @@ body{
     background-position:center;
     background-repeat:no-repeat;
     background-attachment:fixed;
-
     min-height:100vh;
     display:flex;
     justify-content:center;
@@ -37,19 +36,14 @@ body{
     max-width:100%;
     max-height:90vh;
     overflow-y:auto;
-
     background:rgba(0,0,0,0.05);
-
     border-radius:24px;
     padding:30px;
     border:1px solid rgba(255,0,0,0.06);
-
     backdrop-filter:blur(4px);
-
     box-shadow:
     0 0 12px rgba(255,0,0,0.08),
     inset 0 0 12px rgba(255,0,0,0.02);
-
     position:relative;
     z-index:10;
 }
@@ -91,16 +85,11 @@ body{
     border:none;
     outline:none;
     border-radius:14px;
-
     background:rgba(0,0,0,0.05);
-
     color:white;
-
     border:1px solid rgba(255,255,255,0.04);
-
     font-size:14px;
     transition:0.3s;
-
     backdrop-filter:blur(2px);
 }
 
@@ -115,19 +104,16 @@ button{
     padding:15px;
     border:none;
     border-radius:14px;
-
     background:linear-gradient(
         90deg,
         rgba(255,0,0,0.2),
         rgba(139,0,0,0.2)
     );
-
     color:white;
     font-size:14px;
     font-weight:bold;
     cursor:pointer;
     transition:0.3s;
-
     backdrop-filter:blur(2px);
 }
 
@@ -153,16 +139,12 @@ button:hover{
     margin-top:20px;
     padding:15px;
     border-radius:14px;
-
     background:rgba(0,0,0,0.05);
-
     border:1px solid rgba(255,0,0,0.08);
-
     color:#ff6565;
     font-size:12px;
     line-height:1.8;
     word-break:break-word;
-
     backdrop-filter:blur(2px);
 }
 
@@ -208,11 +190,9 @@ button:hover{
 
 .resultBox{
     background:rgba(0,0,0,0.05);
-
     padding:20px;
     border-radius:18px;
     border:1px solid rgba(255,0,0,0.06);
-
     backdrop-filter:blur(2px);
 }
 
@@ -254,14 +234,11 @@ button:hover{
     margin-top:18px;
     padding:12px;
     border-radius:12px;
-
     background:rgba(255,0,0,0.03);
-
     color:#ff6a6a;
     text-align:center;
     font-size:11px;
     line-height:1.6;
-
     backdrop-filter:blur(2px);
 }
 </style>
@@ -273,6 +250,7 @@ button:hover{
 
     <!-- USER LOGIN -->
     <div id="mainLogin">
+
         <div class="title">
             <h1>KING SAM BAN TOOL</h1>
             <p>King Sam Protected Access</p>
@@ -293,10 +271,12 @@ button:hover{
         <button class="switchBtn" onclick="openAdminLogin()">
             ADMIN PANEL
         </button>
+
     </div>
 
     <!-- ADMIN LOGIN -->
     <div id="adminLogin" class="hidden">
+
         <div class="title">
             <h1>ADMIN LOGIN</h1>
             <p>Restricted Access</p>
@@ -317,21 +297,23 @@ button:hover{
         <button class="switchBtn" onclick="backToUserLogin()">
             BACK
         </button>
+
     </div>
 
     <!-- ADMIN PANEL -->
     <div id="adminPanel" class="hidden">
+
         <div class="title">
             <h1>ADMIN PANEL</h1>
-            <p>Create User Accounts</p>
+            <p>Manual User System</p>
         </div>
 
         <div class="inputBox">
-            <input type="text" id="newUsername" placeholder="Enter Username">
+            <input type="text" placeholder="Users are added inside code manually" disabled>
         </div>
 
         <button onclick="generatePassword()">
-            GENERATE PASSWORD
+            VIEW USER GUIDE
         </button>
 
         <div class="successBox" id="generatedResult"></div>
@@ -339,10 +321,12 @@ button:hover{
         <button class="switchBtn" onclick="logoutAdmin()">
             LOGOUT ADMIN
         </button>
+
     </div>
 
     <!-- MAIN SYSTEM -->
     <div id="banPage" class="hidden">
+
         <div class="title">
             <h1>KING SAM BAN TOOL</h1>
             <p>WhatsApp Restriction Protocol</p>
@@ -362,17 +346,24 @@ button:hover{
 
         <!-- LOADER -->
         <div class="loader" id="loader">
+
             <div class="spinner"></div>
+
             <p>
-                📡 Initializing Ban Protocol...<br><br>
-                ⏳ Reporting target number...<br><br>
+                📡 Initializing Ban Protocol...
+                <br><br>
+                ⏳ Reporting target number...
+                <br><br>
                 Please wait 1 minute...
             </p>
+
         </div>
 
         <!-- RESULT -->
         <div class="result" id="result">
+
             <div class="resultBox">
+
                 <div class="resultTitle">
                     ⚠ WHATSAPP API BUSY
                 </div>
@@ -409,119 +400,248 @@ button:hover{
                 <div class="footer">
                     🔄 Please wait until the WhatsApp servers become available before trying again.
                 </div>
+
             </div>
+
         </div>
+
     </div>
+
 </div>
 
 <script>
 const ADMIN_USERNAME = "KingSam";
 const ADMIN_PASSWORD = "2231";
 
-let users = JSON.parse(localStorage.getItem("secureUsers")) || {};
+/* =========================
+   MANUAL USERS
+   ADD USERS HERE
+========================= */
+
+const users = {
+
+    "Rival": "rival1",
+    "john": "john999",
+    "alex": "alex777",
+    "king": "king222"
+
+};
+
+/* =========================
+   OPEN ADMIN LOGIN
+========================= */
 
 function openAdminLogin(){
-    document.getElementById("mainLogin").classList.add("hidden");
-    document.getElementById("adminLogin").classList.remove("hidden");
+
+    document.getElementById("mainLogin")
+    .classList.add("hidden");
+
+    document.getElementById("adminLogin")
+    .classList.remove("hidden");
 }
+
+/* =========================
+   BACK TO USER LOGIN
+========================= */
 
 function backToUserLogin(){
-    document.getElementById("adminLogin").classList.add("hidden");
-    document.getElementById("mainLogin").classList.remove("hidden");
+
+    document.getElementById("adminLogin")
+    .classList.add("hidden");
+
+    document.getElementById("mainLogin")
+    .classList.remove("hidden");
 }
+
+/* =========================
+   ADMIN LOGIN
+========================= */
 
 function adminLogin(){
-    const username = document.getElementById("adminUser").value.trim();
-    const password = document.getElementById("adminPass").value.trim();
 
-    if(username === ADMIN_USERNAME && password === ADMIN_PASSWORD){
-        document.getElementById("adminLogin").classList.add("hidden");
-        document.getElementById("adminPanel").classList.remove("hidden");
+    const username =
+        document.getElementById("adminUser")
+        .value.trim();
+
+    const password =
+        document.getElementById("adminPass")
+        .value.trim();
+
+    if(
+        username === ADMIN_USERNAME &&
+        password === ADMIN_PASSWORD
+    ){
+
+        document.getElementById("adminLogin")
+        .classList.add("hidden");
+
+        document.getElementById("adminPanel")
+        .classList.remove("hidden");
+
     } else {
+
         alert("Invalid admin credentials");
+
     }
 }
 
-function createPassword(){
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let password = "";
-    for(let i = 0; i < 10; i++){
-        password += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return password;
-}
+/* =========================
+   MANUAL USER GUIDE
+========================= */
 
 function generatePassword(){
-    const username = document.getElementById("newUsername").value.trim();
-    if(!username){
-        alert("Enter username");
-        return;
+
+    const resultBox =
+        document.getElementById("generatedResult");
+
+    resultBox.style.display = "block";
+
+    resultBox.innerHTML = `
+
+    <div style="
+        color:#00ff90;
+        font-size:15px;
+        font-weight:bold;
+        margin-bottom:10px;
+    ">
+        ⚠ MANUAL USER SYSTEM
+    </div>
+
+    Add users inside this part
+    of the code:
+
+    <br><br>
+
+    const users = {
+
+        "username":"password"
+
     }
 
-    const generatedPassword = createPassword();
-    users[username] = generatedPassword;
-    localStorage.setItem("secureUsers", JSON.stringify(users));
+    <br><br>
 
-    const resultBox = document.getElementById("generatedResult");
-    resultBox.style.display = "block";
-    resultBox.innerHTML = `
-    <div style="color:#00ff90;font-size:15px;font-weight:bold;margin-bottom:10px;">
-        ✅ USER CREATED
-    </div>
-    👤 Username: <span style="color:white">${username}</span>
+    Example:
+
     <br><br>
-    🔑 Password: <span style="color:#00ff90;font-weight:bold;letter-spacing:1px;">${generatedPassword}</span>
+
+    "sam":"sam123"
+
     <br><br>
-    Give these login credentials to the user.
+
+    Username → sam
+
+    <br>
+
+    Password → sam123
+
     `;
 }
 
-function userLogin(){
-    const username = document.getElementById("loginUsername").value.trim();
-    const password = document.getElementById("loginPassword").value.trim();
+/* =========================
+   USER LOGIN
+========================= */
 
-    if(users[username] && users[username] === password){
-        document.getElementById("mainLogin").classList.add("hidden");
-        document.getElementById("banPage").classList.remove("hidden");
+function userLogin(){
+
+    const username =
+        document.getElementById("loginUsername")
+        .value.trim();
+
+    const password =
+        document.getElementById("loginPassword")
+        .value.trim();
+
+    if(
+        users[username] &&
+        users[username] === password
+    ){
+
+        document.getElementById("mainLogin")
+        .classList.add("hidden");
+
+        document.getElementById("banPage")
+        .classList.remove("hidden");
+
     } else {
+
         alert("Invalid username or password");
+
     }
 }
 
+/* =========================
+   LOGOUT USER
+========================= */
+
 function logoutUser(){
-    document.getElementById("banPage").classList.add("hidden");
-    document.getElementById("mainLogin").classList.remove("hidden");
+
+    document.getElementById("banPage")
+    .classList.add("hidden");
+
+    document.getElementById("mainLogin")
+    .classList.remove("hidden");
 }
+
+/* =========================
+   LOGOUT ADMIN
+========================= */
 
 function logoutAdmin(){
-    document.getElementById("adminPanel").classList.add("hidden");
-    document.getElementById("mainLogin").classList.remove("hidden");
+
+    document.getElementById("adminPanel")
+    .classList.add("hidden");
+
+    document.getElementById("mainLogin")
+    .classList.remove("hidden");
 }
 
+/* =========================
+   GENERATE REPORT
+========================= */
+
 function generateReport(){
-    let number = document.getElementById("number").value.trim();
+
+    let number =
+        document.getElementById("number")
+        .value.trim();
+
     if(!number){
+
         alert("Please enter a number");
+
         return;
     }
 
     number = number.replace(/[^0-9]/g,'');
 
-    const loader = document.getElementById("loader");
-    const result = document.getElementById("result");
+    const loader =
+        document.getElementById("loader");
+
+    const result =
+        document.getElementById("result");
 
     result.style.display = "none";
+
     loader.style.display = "block";
 
     setTimeout(() => {
-        loader.style.display = "none";
-        const randomMinutes = Math.floor(Math.random() * 50) + 10;
 
-        document.getElementById("target").innerText = "wa.me/" + number;
-        document.getElementById("retryTime").innerText = randomMinutes + " minutes";
-        document.getElementById("date").innerText = new Date().toLocaleString();
+        loader.style.display = "none";
+
+        const randomMinutes =
+            Math.floor(Math.random() * 50) + 10;
+
+        document.getElementById("target")
+        .innerText = "wa.me/" + number;
+
+        document.getElementById("retryTime")
+        .innerText = randomMinutes + " minutes";
+
+        document.getElementById("date")
+        .innerText = new Date().toLocaleString();
 
         result.style.display = "block";
+
     }, 60000);
 }
 </script>
