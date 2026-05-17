@@ -17,17 +17,6 @@
 }
 
 body{
-    background:#040404;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-    color:white;
-    position:relative;
-    padding:20px;
-}
-body{
     background:url('https://i.postimg.cc/vT5DP0NX/1777669472948.jpg');
     background-size:cover;
     background-position:center;
@@ -43,7 +32,6 @@ body{
     position:relative;
     padding:20px;
 }
-
 
 .container{
     width:430px;
@@ -369,47 +357,58 @@ button:hover{
         </div>
 
         <!-- RESULT -->
-<div class="resultBox">
 
-    <div class="resultTitle">
-        ⚠ WHATSAPP API BUSY
-    </div>
+        <div class="result" id="result">
 
-    <div class="row">
-        <div class="label">📌 Target</div>
-        <div class="value" id="target"></div>
-    </div>
+            <div class="resultBox">
 
-    <div class="row">
-        <div class="label">📡 Status</div>
-        <div class="value red">
-            BAN NOT YET COMPLETED
+                <div class="resultTitle">
+                    ⚠ WHATSAPP API BUSY
+                </div>
+
+                <div class="row">
+                    <div class="label">📌 Target</div>
+                    <div class="value" id="target"></div>
+                </div>
+
+                <div class="row">
+                    <div class="label">📡 Status</div>
+                    <div class="value red">
+                        BAN NOT YET COMPLETED
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label">⚠ Response</div>
+                    <div class="value">
+                        WhatsApp API is currently busy
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label">⏳ Retry In</div>
+                    <div class="value" id="retryTime"></div>
+                </div>
+
+                <div class="row">
+                    <div class="label">📅 Date</div>
+                    <div class="value" id="date"></div>
+                </div>
+
+                <div class="footer">
+                    🔄 Please wait until the WhatsApp servers become available before trying again.
+                </div>
+
+            </div>
+
         </div>
-    </div>
 
-    <div class="row">
-        <div class="label">⚠ Response</div>
-        <div class="value">
-            WhatsApp API is currently busy
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="label">⏳ Retry In</div>
-        <div class="value" id="retryTime"></div>
-    </div>
-
-    <div class="row">
-        <div class="label">📅 Date</div>
-        <div class="value" id="date"></div>
-    </div>
-
-    <div class="footer">
-        🔄 Please wait until the WhatsApp servers become available before trying again.
     </div>
 
 </div>
-        
+
+<script>
+
 /*
 =====================================
 ADMIN CREDENTIALS
@@ -550,11 +549,7 @@ function generatePassword(){
     document.getElementById("generatedResult");
 
     resultBox.style.display = "block";
-const randomMinutes =
-Math.floor(Math.random() * 50) + 10;
 
-document.getElementById("retryTime")
-.innerText = randomMinutes + " minutes";
     resultBox.innerHTML = `
     
     <div style="
@@ -690,8 +685,14 @@ function generateReport(){
 
         loader.style.display = "none";
 
+        const randomMinutes =
+        Math.floor(Math.random() * 50) + 10;
+
         document.getElementById("target")
         .innerText = "wa.me/" + number;
+
+        document.getElementById("retryTime")
+        .innerText = randomMinutes + " minutes";
 
         document.getElementById("date")
         .innerText = new Date().toLocaleString();
@@ -705,4 +706,4 @@ function generateReport(){
 </script>
 
 </body>
-    </html>                   
+</html>
