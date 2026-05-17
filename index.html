@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -38,15 +37,18 @@ body{
     max-width:100%;
     max-height:90vh;
     overflow-y:auto;
-    background:rgba(10,10,10,0.94);
+
+    background:rgba(0,0,0,0.05);
+
     border-radius:24px;
     padding:30px;
-    border:1px solid rgba(255,0,0,0.15);
-    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,0,0,0.06);
+
+    backdrop-filter:blur(4px);
 
     box-shadow:
-    0 0 25px rgba(255,0,0,0.2),
-    inset 0 0 20px rgba(255,0,0,0.05);
+    0 0 12px rgba(255,0,0,0.08),
+    inset 0 0 12px rgba(255,0,0,0.02);
 
     position:relative;
     z-index:10;
@@ -70,11 +72,12 @@ body{
     color:#ff2b2b;
     font-size:30px;
     letter-spacing:3px;
+    text-shadow:0 0 15px rgba(255,0,0,0.6);
 }
 
 .title p{
     margin-top:8px;
-    color:#777;
+    color:#ddd;
     font-size:12px;
 }
 
@@ -88,11 +91,17 @@ body{
     border:none;
     outline:none;
     border-radius:14px;
-    background:#111;
+
+    background:rgba(0,0,0,0.05);
+
     color:white;
-    border:1px solid rgba(255,255,255,0.05);
+
+    border:1px solid rgba(255,255,255,0.04);
+
     font-size:14px;
     transition:0.3s;
+
+    backdrop-filter:blur(2px);
 }
 
 .inputBox input:focus{
@@ -106,12 +115,20 @@ button{
     padding:15px;
     border:none;
     border-radius:14px;
-    background:linear-gradient(90deg,#ff0000,#8b0000);
+
+    background:linear-gradient(
+        90deg,
+        rgba(255,0,0,0.2),
+        rgba(139,0,0,0.2)
+    );
+
     color:white;
     font-size:14px;
     font-weight:bold;
     cursor:pointer;
     transition:0.3s;
+
+    backdrop-filter:blur(2px);
 }
 
 button:hover{
@@ -120,8 +137,8 @@ button:hover{
 }
 
 .switchBtn{
-    background:#111;
-    border:1px solid rgba(255,0,0,0.2);
+    background:rgba(0,0,0,0.05);
+    border:1px solid rgba(255,0,0,0.08);
 }
 
 .hidden{
@@ -136,12 +153,17 @@ button:hover{
     margin-top:20px;
     padding:15px;
     border-radius:14px;
-    background:#0f0f0f;
-    border:1px solid rgba(255,0,0,0.2);
+
+    background:rgba(0,0,0,0.05);
+
+    border:1px solid rgba(255,0,0,0.08);
+
     color:#ff6565;
     font-size:12px;
     line-height:1.8;
     word-break:break-word;
+
+    backdrop-filter:blur(2px);
 }
 
 .loader{
@@ -155,7 +177,7 @@ button:hover{
     height:70px;
     margin:auto;
     border-radius:50%;
-    border:5px solid rgba(255,0,0,0.15);
+    border:5px solid rgba(255,0,0,0.1);
     border-top:5px solid #ff0000;
     animation:spin 1s linear infinite;
 }
@@ -185,10 +207,13 @@ button:hover{
 }
 
 .resultBox{
-    background:#0f0f0f;
+    background:rgba(0,0,0,0.05);
+
     padding:20px;
     border-radius:18px;
-    border:1px solid rgba(255,0,0,0.15);
+    border:1px solid rgba(255,0,0,0.06);
+
+    backdrop-filter:blur(2px);
 }
 
 .resultTitle{
@@ -196,18 +221,19 @@ button:hover{
     color:#ff3434;
     margin-bottom:20px;
     font-size:18px;
+    text-shadow:0 0 12px rgba(255,0,0,0.6);
 }
 
 .row{
     display:flex;
     justify-content:space-between;
     padding:12px 0;
-    border-bottom:1px solid rgba(255,255,255,0.05);
+    border-bottom:1px solid rgba(255,255,255,0.04);
     gap:10px;
 }
 
 .label{
-    color:#888;
+    color:#ccc;
     font-size:13px;
 }
 
@@ -228,13 +254,16 @@ button:hover{
     margin-top:18px;
     padding:12px;
     border-radius:12px;
-    background:rgba(255,0,0,0.08);
+
+    background:rgba(255,0,0,0.03);
+
     color:#ff6a6a;
     text-align:center;
     font-size:11px;
     line-height:1.6;
-}
 
+    backdrop-filter:blur(2px);
+}
 </style>
 </head>
 
@@ -243,9 +272,7 @@ button:hover{
 <div class="container">
 
     <!-- USER LOGIN -->
-
     <div id="mainLogin">
-
         <div class="title">
             <h1>KING SAM BAN TOOL</h1>
             <p>King Sam Protected Access</p>
@@ -266,13 +293,10 @@ button:hover{
         <button class="switchBtn" onclick="openAdminLogin()">
             ADMIN PANEL
         </button>
-
     </div>
 
     <!-- ADMIN LOGIN -->
-
     <div id="adminLogin" class="hidden">
-
         <div class="title">
             <h1>ADMIN LOGIN</h1>
             <p>Restricted Access</p>
@@ -293,13 +317,10 @@ button:hover{
         <button class="switchBtn" onclick="backToUserLogin()">
             BACK
         </button>
-
     </div>
 
     <!-- ADMIN PANEL -->
-
     <div id="adminPanel" class="hidden">
-
         <div class="title">
             <h1>ADMIN PANEL</h1>
             <p>Create User Accounts</p>
@@ -318,13 +339,10 @@ button:hover{
         <button class="switchBtn" onclick="logoutAdmin()">
             LOGOUT ADMIN
         </button>
-
     </div>
 
     <!-- MAIN SYSTEM -->
-
     <div id="banPage" class="hidden">
-
         <div class="title">
             <h1>KING SAM BAN TOOL</h1>
             <p>WhatsApp Restriction Protocol</p>
@@ -343,25 +361,18 @@ button:hover{
         </button>
 
         <!-- LOADER -->
-
         <div class="loader" id="loader">
-
             <div class="spinner"></div>
-
             <p>
                 📡 Initializing Ban Protocol...<br><br>
                 ⏳ Reporting target number...<br><br>
                 Please wait 1 minute...
             </p>
-
         </div>
 
         <!-- RESULT -->
-
         <div class="result" id="result">
-
             <div class="resultBox">
-
                 <div class="resultTitle">
                     ⚠ WHATSAPP API BUSY
                 </div>
@@ -398,311 +409,121 @@ button:hover{
                 <div class="footer">
                     🔄 Please wait until the WhatsApp servers become available before trying again.
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </div>
 
 <script>
-
-/*
-=====================================
-ADMIN CREDENTIALS
-=====================================
-*/
-
 const ADMIN_USERNAME = "KingSam";
 const ADMIN_PASSWORD = "2231";
 
-/*
-=====================================
-SAVE USERS
-=====================================
-*/
-
-let users =
-JSON.parse(localStorage.getItem("secureUsers")) || {};
-
-/*
-=====================================
-OPEN ADMIN LOGIN
-=====================================
-*/
+let users = JSON.parse(localStorage.getItem("secureUsers")) || {};
 
 function openAdminLogin(){
-
-    document.getElementById("mainLogin")
-    .classList.add("hidden");
-
-    document.getElementById("adminLogin")
-    .classList.remove("hidden");
-
+    document.getElementById("mainLogin").classList.add("hidden");
+    document.getElementById("adminLogin").classList.remove("hidden");
 }
-
-/*
-=====================================
-BACK TO USER LOGIN
-=====================================
-*/
 
 function backToUserLogin(){
-
-    document.getElementById("adminLogin")
-    .classList.add("hidden");
-
-    document.getElementById("mainLogin")
-    .classList.remove("hidden");
-
+    document.getElementById("adminLogin").classList.add("hidden");
+    document.getElementById("mainLogin").classList.remove("hidden");
 }
-
-/*
-=====================================
-ADMIN LOGIN
-=====================================
-*/
 
 function adminLogin(){
+    const username = document.getElementById("adminUser").value.trim();
+    const password = document.getElementById("adminPass").value.trim();
 
-    const username =
-    document.getElementById("adminUser").value.trim();
-
-    const password =
-    document.getElementById("adminPass").value.trim();
-
-    if(
-        username === ADMIN_USERNAME &&
-        password === ADMIN_PASSWORD
-    ){
-
-        document.getElementById("adminLogin")
-        .classList.add("hidden");
-
-        document.getElementById("adminPanel")
-        .classList.remove("hidden");
-
+    if(username === ADMIN_USERNAME && password === ADMIN_PASSWORD){
+        document.getElementById("adminLogin").classList.add("hidden");
+        document.getElementById("adminPanel").classList.remove("hidden");
     } else {
-
         alert("Invalid admin credentials");
-
     }
-
 }
-
-/*
-=====================================
-CREATE RANDOM PASSWORD
-=====================================
-*/
 
 function createPassword(){
-
-    const chars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let password = "";
-
     for(let i = 0; i < 10; i++){
-
-        password += chars.charAt(
-            Math.floor(Math.random() * chars.length)
-        );
-
+        password += chars.charAt(Math.floor(Math.random() * chars.length));
     }
-
     return password;
-
 }
-
-/*
-=====================================
-GENERATE USER PASSWORD
-=====================================
-*/
 
 function generatePassword(){
-
-    const username =
-    document.getElementById("newUsername").value.trim();
-
+    const username = document.getElementById("newUsername").value.trim();
     if(!username){
-
         alert("Enter username");
         return;
-
     }
 
-    const generatedPassword =
-    createPassword();
-
+    const generatedPassword = createPassword();
     users[username] = generatedPassword;
+    localStorage.setItem("secureUsers", JSON.stringify(users));
 
-    localStorage.setItem(
-        "secureUsers",
-        JSON.stringify(users)
-    );
-
-    const resultBox =
-    document.getElementById("generatedResult");
-
+    const resultBox = document.getElementById("generatedResult");
     resultBox.style.display = "block";
-
     resultBox.innerHTML = `
-    
-    <div style="
-        color:#00ff90;
-        font-size:15px;
-        font-weight:bold;
-        margin-bottom:10px;
-    ">
+    <div style="color:#00ff90;font-size:15px;font-weight:bold;margin-bottom:10px;">
         ✅ USER CREATED
     </div>
-
-    👤 Username:
-    <span style="color:white">
-        ${username}
-    </span>
-
+    👤 Username: <span style="color:white">${username}</span>
     <br><br>
-
-    🔑 Password:
-    <span style="
-        color:#00ff90;
-        font-weight:bold;
-        letter-spacing:1px;
-    ">
-        ${generatedPassword}
-    </span>
-
+    🔑 Password: <span style="color:#00ff90;font-weight:bold;letter-spacing:1px;">${generatedPassword}</span>
     <br><br>
-
     Give these login credentials to the user.
-
     `;
-
 }
-
-/*
-=====================================
-USER LOGIN
-=====================================
-*/
 
 function userLogin(){
+    const username = document.getElementById("loginUsername").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
 
-    const username =
-    document.getElementById("loginUsername").value.trim();
-
-    const password =
-    document.getElementById("loginPassword").value.trim();
-
-    if(
-        users[username] &&
-        users[username] === password
-    ){
-
-        document.getElementById("mainLogin")
-        .classList.add("hidden");
-
-        document.getElementById("banPage")
-        .classList.remove("hidden");
-
+    if(users[username] && users[username] === password){
+        document.getElementById("mainLogin").classList.add("hidden");
+        document.getElementById("banPage").classList.remove("hidden");
     } else {
-
         alert("Invalid username or password");
-
     }
-
 }
-
-/*
-=====================================
-LOGOUT USER
-=====================================
-*/
 
 function logoutUser(){
-
-    document.getElementById("banPage")
-    .classList.add("hidden");
-
-    document.getElementById("mainLogin")
-    .classList.remove("hidden");
-
+    document.getElementById("banPage").classList.add("hidden");
+    document.getElementById("mainLogin").classList.remove("hidden");
 }
-
-/*
-=====================================
-LOGOUT ADMIN
-=====================================
-*/
 
 function logoutAdmin(){
-
-    document.getElementById("adminPanel")
-    .classList.add("hidden");
-
-    document.getElementById("mainLogin")
-    .classList.remove("hidden");
-
+    document.getElementById("adminPanel").classList.add("hidden");
+    document.getElementById("mainLogin").classList.remove("hidden");
 }
 
-/*
-=====================================
-BAN REPORT
-=====================================
-*/
-
 function generateReport(){
-
-    let number =
-    document.getElementById("number").value.trim();
-
+    let number = document.getElementById("number").value.trim();
     if(!number){
-
         alert("Please enter a number");
         return;
-
     }
 
-    number =
-    number.replace(/[^0-9]/g,'');
+    number = number.replace(/[^0-9]/g,'');
 
-    const loader =
-    document.getElementById("loader");
-
-    const result =
-    document.getElementById("result");
+    const loader = document.getElementById("loader");
+    const result = document.getElementById("result");
 
     result.style.display = "none";
-
     loader.style.display = "block";
 
     setTimeout(() => {
-
         loader.style.display = "none";
+        const randomMinutes = Math.floor(Math.random() * 50) + 10;
 
-        const randomMinutes =
-        Math.floor(Math.random() * 50) + 10;
-
-        document.getElementById("target")
-        .innerText = "wa.me/" + number;
-
-        document.getElementById("retryTime")
-        .innerText = randomMinutes + " minutes";
-
-        document.getElementById("date")
-        .innerText = new Date().toLocaleString();
+        document.getElementById("target").innerText = "wa.me/" + number;
+        document.getElementById("retryTime").innerText = randomMinutes + " minutes";
+        document.getElementById("date").innerText = new Date().toLocaleString();
 
         result.style.display = "block";
-
     }, 60000);
-
 }
-
 </script>
 
 </body>
