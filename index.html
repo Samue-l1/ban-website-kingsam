@@ -27,26 +27,23 @@ body{
     position:relative;
     padding:20px;
 }
+body{
+    background:url('https://i.postimg.cc/vT5DP0NX/1777669472948.jpg');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
 
-body::before{
-    content:'';
-    position:absolute;
-    width:200%;
-    height:200%;
-    background:
-    radial-gradient(circle,#ff00001e 1px,transparent 1px);
-    background-size:40px 40px;
-    animation:bgMove 15s linear infinite;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    color:white;
+    position:relative;
+    padding:20px;
 }
 
-@keyframes bgMove{
-    from{
-        transform:translate(0,0);
-    }
-    to{
-        transform:translate(-40px,-40px);
-    }
-}
 
 .container{
     width:430px;
