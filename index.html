@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>King Sam Secure Ban System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Orbitron',sans-serif;
+}
+
+body{
+    background:url('https://i.postimg.cc/vT5DP0NX/1777669472948.jpg');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    color:white;
+    padding:20px;
+}
+
+.container{
+    width:430px;
+    max-width:100%;
+    max-height:90vh;
+    overflow-y:auto;
+    background:rgba(0,0,0,0.05);
+    border-radius:24px;
+    padding:30px;
+    border:1px solid rgba(255,0,0,0.06);
+    backdrop-filter:blur(4px);
+    box-shadow:
+    0 0 12px rgba(255,0,0,0.08),
+    inset 0 0 12px rgba(255,0,0,0.02);
+}
+
+.title{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.title h1{
+    color:#ff2b2b;
+    font-size:30px;
+    letter-spacing:3px;
+    text-shadow:0 0 15px rgba(255,0,0,0.6);
+}
+
+.title p{
+    margin-top:8px;
+    color:#ddd;
+    font-size:12px;
+}
+
+.inputBox{
+    margin-top:18px;
+}
+
+.inputBox input{
+    width:100%;
+    padding:16px;
+    border:none;
+    outline:none;
+    border-radius:14px;
+    background:rgba(0,0,0,0.05);
+    color:white;
+    border:1px solid rgba(255,255,255,0.04);
+    font-size:14px;
+}
+
+button{
+    width:100%;
+    margin-top:18px;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(
+        90deg,
+        rgba(255,0,0,0.2),
+        rgba(139,0,0,0.2)
+    );
+    color:white;
+    font-size:14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.switchBtn{
+    background:rgba(0,0,0,0.05);
+    border:1px solid rgba(255,0,0,0.08);
+}
+
+.hidden{
+    display:none;
+}
+
+.fakeTitle{
+    margin-top:25px;
+    margin-bottom:15px;
+    text-align:center;
+    color:#ff3434;
+    font-size:20px;
+    text-shadow:0 0 12px rgba(255,0,0,0.6);
+}
+
+.copyBox{
+    margin-top:15px;
+    padding:15px;
+    border-radius:16px;
+    background:rgba(0,0,0,0.05);
+    border:1px solid rgba(255,0,0,0.06);
+}
+
+.copyTitle{
+    color:#ff5a5a;
+    font-size:13px;
+    margin-bottom:10px;
+}
+
+.copyText{
+    color:white;
+    font-size:12px;
+    line-height:1.7;
+    margin-bottom:12px;
+    word-break:break-word;
+}
+
+.copyBtn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    background:rgba(255,0,0,0.15);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.loader{
+    display:none;
+    margin-top:25px;
+    text-align:center;
+}
+
+.spinner{
+    width:70px;
+    height:70px;
+    margin:auto;
+    border-radius:50%;
+    border:5px solid rgba(255,0,0,0.1);
+    border-top:5px solid #ff0000;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.result{
+    display:none;
+    margin-top:25px;
+}
+
+.resultBox{
+    background:rgba(0,0,0,0.05);
+    padding:20px;
+    border-radius:18px;
+    border:1px solid rgba(255,0,0,0.06);
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+}
+
+.label{
+    color:#ccc;
+    font-size:13px;
+}
+
+.value{
+    color:white;
+    font-size:13px;
+    text-align:right;
+}
+
+.red{
+    color:#ff3434;
+    font-weight:bold;
+}
+
+.footer{
+    margin-top:18px;
+    padding:12px;
+    border-radius:12px;
+    background:rgba(255,0,0,0.03);
+    color:#ff6a6a;
+    text-align:center;
+    font-size:11px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- LOGIN -->
+
+    <div id="mainLogin">
+
+        <div class="title">
+            <h1>KING SAM BAN TOOL</h1>
+            <p>King Sam Protected Access</p>
+        </div>
+
+        <div class="inputBox">
+            <input type="text" id="loginUsername" placeholder="Username">
+        </div>
+
+        <div class="inputBox">
+            <input type="password" id="loginPassword" placeholder="Password">
+        </div>
+
+        <button onclick="userLogin()">
+            LOGIN TO SYSTEM
+        </button>
+
+    </div>
+
+    <!-- MAIN PAGE -->
+
+    <div id="banPage" class="hidden">
+
+        <div class="title">
+            <h1>KING SAM BAN TOOL</h1>
+            <p>WhatsApp Restriction Protocol</p>
+        </div>
+
+        <div class="inputBox">
+            <input type="text" id="number" placeholder="Enter target number">
+        </div>
+
+        <button onclick="generateReport()">
+            ACTIVATE BAN REPORT
+        </button>
+
+        <button class="switchBtn" onclick="logoutUser()">
+            LOGOUT
+        </button>
+
+        <!-- BUTTONS -->
+
+        <button onclick="toggleFakeChat()">
+            OPEN FAKE CHAT
+        </button>
+
+        <button onclick="toggleApiBan()">
+            OPEN API BAN
+        </button>
+
+        <!-- FAKE CHAT -->
+
+        <div id="fakeChatBox" class="hidden">
+
+            <div class="fakeTitle">
+                FAKE CHAT
+            </div>
+
+            <div class="copyBox">
+
+                <div class="copyTitle">
+                    TEXT 1
+                </div>
+
+                <div class="copyText" id="text1">
+ьзователь этой платформы. Я здесь, чтобы распространять порнографию и коррупцию на этой платформе, принадлежащей Марку Цукербергу, за деньги. Марк Цукерберг публикует посты о своей жене для физического насилия за деньги, потому что у него маленький пенис, и это ему не помогает. 🔞💋🔥👺
+
+https://miacam.xyz/
+
+https://xhamster.com/videos/miss-jackson-a-light-haired-with-thick-tits-is-mercilessly-banged-by-two-stiff-penises-in-this-insane-xxx-porn-scene-xhiCpGZ?utm_source=ext_shared&utm_medium=referral&utm_campaign=link
+
+https://photos.app.goo.gl/z8TDcJBr85XedYzK7
+
+https://www.xhamster.WhatsApp
+
+https://www.xnxx.WhatsApp
+
+https://smb@support.whatsapp.com.pornhub
+
+https://whatsappsex4arab.xxx.com/
+
+https://support.whatsapp.xxnxx
+
+https://ẉhatsapp.com/S_O_N_7
+
+Я распространяю коррупцию на этой платформе. Я убиваю людей и продаю органы за деньги, и Марк Цукерберг не против этого. Никто не может остановить нас, пользователей этой платформы, потому что Марк помогает нам распространять коррупцию на этой платформе. 🔪👺😈
+
+https://xgore.net/woman-organs-splattered-across-the-road-after-a-car-accident/
+
+https://xgore.net.whatsApp
+
+https://whatsappsexsex.xxx.com/
+
+https://www.support.whatsapp.com
+
+https://ẉhatsapp.com/S_O_N_7
+
+Я являюсь членом террористической группы. Я убиваю людей и публикую их посты на этой платформе за деньги, а также эксплуатирую детей за деньги, с помощью Марка Цукерберга распространяя убийства и коррупцию на этой платформе, потому что Марка Цукерберга это устраивает. 🔪👺♨️
+
+https://xgore.net/woman-organs-splattered-across-the-road-after-a-car-accident/
+
+https://xgore.net.whatsApp
+
+https://www.support.whatsapp.com
+
+https://smb@support.whatsapp.com.pornhub
+
+https://ẉhatsapp.com/S_O_N_7
+
+Это наш контактный номер 👇👇😈
+
+https://api.whatsapp.com/send?phone=+254
+                </div>
+
+                <button class="copyBtn"
+                onclick="copyText('text1')">
+                    COPY TEXT 1
+                </button>
+
+            </div>
+
+            <div class="copyBox">
+
+                <div class="copyTitle">
+                    TEXT 2
+                </div>
+
+                <div class="copyText" id="text2">
+Здравствуйте,🔞 компания WhatsApp. Я публикую порнографические видео, видео с изнасилованием детей,🌈🥵---сексуальный контент, изнасилования и убийства пользователей WhatsApp, торговлю наркотиками, и я сожгу компанию 🔞🔥
+
+Whathttps://www.sex.xnxx.whatsapp.xxxx.com/_-_🥵🔞
+
+https://www.sex.xnxxwhatsapp.com/🔞👄
+
+http://www.whatsapp.sex.xnxxsx.com/🥵
+
+https://www.sex.xnxx.whatsapp.xxxx.com/
+
+https://www.sexwhatsappxnxx.com/🌈❤️
+
+https://www.xnxxwhatsapp.com/🔞🥵
+
+https://whatsappsex4arab.xxx.com/
+
+https://whatsappsexsex.xxx.com
+
+smb@support.whatsapp.com/
+android@whatsapp.com 🔞
+
+Today
+
+android@support.whatsapp.com android_web@support.whatsapp.com https://www.xnxx.com/video-10g9grcc/sApp и 🥵👄убью пользователей и
+
+сотрудников WhatsApp. https://www.xnxx.com/video-14d74b9c/intense_bl onde_britney_amber_has_a_great_pair_ of_double_ds_to_play_with_while_her_tight_b🔞
+
+https://www.xnxx.com/video-18frtv24/26/big_titted_babe_britney_amber_anally_on_the_floor..._damn_this_babe_fucking_loves_analhttp://zsxjtsgzborzdily p64c6pwnjz5eic76bsksbxzqefzogwcyd nkjy3yd.onion
+
+http://meynethaffeecapsvfphrcnfrx44w 2nskgls2juwitibvqctk2plvhqd.onion http://spywaredrcdg5krvjnukp3vbdwiqc v3zwbrcg6qh27kiwecm4qyfphid.onion http://digdeep4orxw6psc33yxa2dgmuy cj74zi6334xhxjlgppw6odvkzkiad.onion http://killnod2s7703axkktdu52aqmmy4 acisz2gicbhjm4xbvxa2zfftteyd.onion http://lainwir3s4y5r7mqm3kurzpljyf77vty2hrrfkps6wm4nnnqzest4lqd.onion
+
+http://cgjzkysxa4ru5rhrtr6rafckhexbisbtxwg2fg743cjumioysmirhdad.onion
+
+http://zsxjtsgzborzdllyp64c6pwnjz5eic76bsksbxzqefzogwcydnkjy3yd.onion
+
+http://eludemailxhnqzfmxehy3bk5guyhlxbunfyhkcksv4gvx6d3wcf6smad.onion
+
+http://xdkriz6cn2avvcr2vks5lvvtmfojzohjzj4fhyuka55mvljeso2ztqd.onion
+
+http://xdkriz6cn2avvcr2vks5lvvtmfojz2ohjzj4fhyuka55mvljeso2ztqd.onion/
+
+http://killnod2s7703axkktdu52agmmy4acisz2gicbhjm4xbvxa2zfftteyd.onion
+
+http://lainwir3s4y5r7mqm3kurzpljyf77vty2hrrfkps6wm4nnnqzest4lqd.onion
+
+https://www.sex.xnxx.whatsapp.xxxx.com/
+
+xnxx@whatsapp.com
+
+smb@support.whatsapp.com
+
+jan@whatsapp.com
+
+support@whatsapp.com
+
+Xnxx@support.whatsapp.com
+
+smb_web@support.whatsapp.com
+
+pornographic-iphone@support.whatsapp.com
+
+rape@support.whatsapp.com
+
+sex@support.wahtsapp.com
+
+xnxx_web@support.whatsapp.com
+
+https://api.whatsapp.com/send?phone=+
+                </div>
+
+                <button class="copyBtn"
+                onclick="copyText('text2')">
+                    COPY TEXT 2
+                </button>
+
+            </div>
+
+            <div class="copyBox">
+
+                <div class="copyTitle">
+                    TEXT 3
+                </div>
+
+                <div class="copyText" id="text3">
+हेलो व्हाट्सएप उपयोगकर्ताओं, मैं एक पोर्न निर्माता हूं जो आपको बलात्कार करना सिखाता है, हम प्रसिद्ध व्हाट्सएप प्रोग्राम के माध्यम से लड़कियों को 800 मिलियन डॉलर में बेचते हैं, हम आपको हमारे साथ जुड़ने के लिए प्रोत्साहित करते हैं, हम कुछ व्हाट्सएप उपयोगकर्ताओं को यातना देते हैं या घायल करते हैं, हम उनके शरीर पर अत्याचार करते हैं हम बेच रहे हैं केवल इसका दिल $80 में और इसकी किडनी $90 में। यदि आप हमारे साथ काम करते हैं, तो हम आपको $7500 देंगे। लड़कियों से बलात्कार करो और सेक्सी वीडियो बनाओ. https://www.xnxx.com/search/fisting?id=  यदि आप हत्या में रुचि रखते हैं या अमीर बनना चाहते हैं, तो व्हाट्सएप के माध्यम से हमसे संपर्क करेंПривет, пользователь WhatsApp, я менеджер порнокомпании, меня зовут Аслам Хан. Я отправляю сексуальные видео пользователям WhatsApp или продаю их за 600 долларов. Наш сайт для просмотра порноhttps://www.xnxx.com/video-16at7r7a/liinda_travesti_novata_gaby_ferraz_fode_gostoso_com_o_pauzudo_e_recebe_bastante_porra_na_boquinha. Если у вас есть девушка, мы купим его за 10 000 долларов. Пожалуйста, пришлите этот текст нужно отправить пользователям WhatsApp, чтобы каждый мог получить от него пользу, свяжитесь со мной👇🏻🔞
+https://api.whatsapp.com/send?phone=
+⓵نشر نسخ واتس
+②برامج الهكر
+③برامج الفيروسات
+④برامج فك حظر
+⑤برامج حظر أرقام
+⑥أكواد حظر أرقام
+⑦أكواد فك حظر
+⑧ثغرات بند جروبات
+⑨أدوات تريمكس
+10نسـۥـــۥـَٰـخ حظر أرقام
+ تطبيــــٓــق تلغيــم بنـود حظــــٓــر واتســـاب
+👑⋮⃟𝟐𝟎𝟎𝟐::✵)) ـ⚘,🥺🇯🇴┊𖤐𓈒𓏲
+                </div>
+
+                <button class="copyBtn"
+                onclick="copyText('text3')">
+                    COPY TEXT 3
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- API BAN -->
+
+        <div id="apiBanBox" class="hidden">
+
+            <div class="fakeTitle">
+                API BAN
+            </div>
+
+            <div class="copyBox">
+
+                <div class="copyText" id="apiText">
+de.greenapi.org
+Chat port: 8443
+Media port: 7777
+
+Connect proxy
+                </div>
+
+                <button class="copyBtn"
+                onclick="copyText('apiText')">
+                    COPY API TEXT
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- LOADER -->
+
+        <div class="loader" id="loader">
+
+            <div class="spinner"></div>
+
+            <p>
+                📡 Initializing Ban Protocol...
+                <br><br>
+                ⏳ Reporting target number...
+                <br><br>
+                Please wait 1 minute...
+            </p>
+
+        </div>
+
+        <!-- RESULT -->
+
+        <div class="result" id="result">
+
+            <div class="resultBox">
+
+                <div class="fakeTitle">
+                    ⚠ WHATSAPP API BUSY
+                </div>
+
+                <div class="row">
+                    <div class="label">📌 Target</div>
+                    <div class="value" id="target"></div>
+                </div>
+
+                <div class="row">
+                    <div class="label">📡 Status</div>
+                    <div class="value red">
+                        BAN NOT YET COMPLETED
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label">⚠ Response</div>
+                    <div class="value">
+                        WhatsApp API is currently busy
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="label">⏳ Retry In</div>
+                    <div class="value" id="retryTime"></div>
+                </div>
+
+                <div class="row">
+                    <div class="label">📅 Date</div>
+                    <div class="value" id="date"></div>
+                </div>
+
+                <div class="footer">
+                    🔄 Please wait until the WhatsApp servers become available before trying again.
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const users = {
+
+      "Rival": "rival1",
+    "TheKabras": "Kabras01",
+    "alex": "alex777",
+    "king": "king222"
+};
+
+function userLogin(){
+
+    const username =
+    document.getElementById("loginUsername")
+    .value.trim();
+
+    const password =
+    document.getElementById("loginPassword")
+    .value.trim();
+
+    if(
+        users[username] &&
+        users[username] === password
+    ){
+
+        document.getElementById("mainLogin")
+        .classList.add("hidden");
+
+        document.getElementById("banPage")
+        .classList.remove("hidden");
+
+    } else {
+
+        alert("Invalid username or password");
+
+    }
+}
+
+function logoutUser(){
+
+    document.getElementById("banPage")
+    .classList.add("hidden");
+
+    document.getElementById("mainLogin")
+    .classList.remove("hidden");
+}
+
+function copyText(id){
+
+    let text =
+    document.getElementById(id)
+    .innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Copied Successfully");
+}
+
+function toggleFakeChat(){
+
+    document.getElementById("fakeChatBox")
+    .classList.toggle("hidden");
+}
+
+function toggleApiBan(){
+
+    document.getElementById("apiBanBox")
+    .classList.toggle("hidden");
+}
+
+function generateReport(){
+
+    let number =
+    document.getElementById("number")
+    .value.trim();
+
+    if(!number){
+
+        alert("Please enter a number");
+        return;
+    }
+
+    number = number.replace(/[^0-9]/g,'');
+
+    const loader =
+    document.getElementById("loader");
+
+    const result =
+    document.getElementById("result");
+
+    result.style.display = "none";
+
+    loader.style.display = "block";
+
+    setTimeout(() => {
+
+        loader.style.display = "none";
+
+        const randomMinutes =
+        Math.floor(Math.random() * 50) + 10;
+
+        document.getElementById("target")
+        .innerText = "wa.me/" + number;
+
+        document.getElementById("retryTime")
+        .innerText = randomMinutes + " minutes";
+
+        document.getElementById("date")
+        .innerText = new Date().toLocaleString();
+
+        result.style.display = "block";
+
+    }, 60000);
+}
+
+</script>
+
+</body>
+</html>
